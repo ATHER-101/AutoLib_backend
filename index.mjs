@@ -14,8 +14,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(cors({
-    // origin: 'http://localhost:5173'
-    origin: 'https://autolib-easy-librarying.onrender.com'
+    origin: process.env.FRONTEND
 }));
 app.use(express.json());
 
