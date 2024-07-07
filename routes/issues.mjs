@@ -42,7 +42,6 @@ router.get("/api/issues/check-issue", async (request, response) => {
 router.post("/api/issues/issue-book", async (request, response) => {
     const {user_id} =  request.body;
     const {book_id} = request.body;
-    console.log(user_id,book_id)
     const client = await pool.connect();
     try {
         const res = await client.query(`SELECT issue_book($1,$2);`,[user_id,book_id]);
@@ -59,7 +58,6 @@ router.post("/api/issues/issue-book", async (request, response) => {
 router.post("/api/issues/return-book", async (request, response) => {
     const {user_id} =  request.body;
     const {book_id} = request.body;
-    console.log(user_id,book_id)
     const client = await pool.connect();
     try {
         const res = await client.query(`SELECT return_book($1,$2);`,[user_id,book_id]);

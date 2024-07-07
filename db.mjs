@@ -13,21 +13,7 @@ const pool = new Pool({
     ssl: {
         rejectUnauthorized: false
     },
-    log: (msg) => console.log(msg)
 })
-
-pool.on('connect', client => {
-    console.log('Database connected');
-});
-
-pool.on('remove', client => {
-    console.log('Database connection removed');
-});
-
-pool.on('error', (err, client) => {
-    console.error('Unexpected error on idle client', err);
-    process.exit(-1);
-});
 
 export default pool;
 

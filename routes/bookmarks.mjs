@@ -38,7 +38,6 @@ router.get("/api/check-bookmark", async (request, response) => {
 router.post("/api/add-bookmark", async (request, response) => {
     const { user_id } = request.body;
     const { book_id } = request.body;
-    console.log(user_id, book_id)
     const client = await pool.connect();
     try {
         const res = await client.query(
@@ -60,7 +59,6 @@ router.post("/api/add-bookmark", async (request, response) => {
 router.post("/api/remove-bookmark", async (request, response) => {
     const { user_id } = request.body;
     const { book_id } = request.body;
-    console.log(user_id, book_id)
     const client = await pool.connect();
     try {
         const res = await client.query(`select remove_bookmark($1, $2);`, [user_id, book_id]);
