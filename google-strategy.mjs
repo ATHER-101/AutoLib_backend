@@ -10,6 +10,7 @@ passport.use(
         clientID: process.env.OAUTH_CLIENT_ID,
         clientSecret: process.env.OAUTH_CLIENT_SECRET,
         callbackURL: process.env.OAUTH_REDIRECT_URL,
+        proxy: true,
         scope: ['email', 'profile'],
     },
         async (accessToken, refreshToken, profile, done) => {
