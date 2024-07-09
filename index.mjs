@@ -37,7 +37,6 @@ app.use(session({
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    domain: process.env.FRONTEND,
   }
 }))
 
