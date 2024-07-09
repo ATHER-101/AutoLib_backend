@@ -1,4 +1,4 @@
-import { Router, response } from "express";
+import { Router } from "express";
 import passport from 'passport';
 
 const router = Router();
@@ -11,9 +11,9 @@ router.get("/api/auth/google/callback", passport.authenticate("google",{
 }));
 
 router.get("/api/auth/logout", (request,response)=>{
-    request.logout((err) => {
-        if (err) {
-            return next(err);
+    request.logout((error) => {
+        if (error) {
+            return console.log(error);
         }
         response.redirect(process.env.FRONTEND);
     });
