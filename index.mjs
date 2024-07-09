@@ -39,7 +39,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-  origin: process.env.FRONTEND,
+  origin: 'https://autolib-easy-librarying.onrender.com',
   credentials: true
 }));
 
