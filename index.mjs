@@ -25,23 +25,27 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(session({
-    store: new PgSession({
-        pool: pool,
-        tableName: 'session',
-      }),
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 }
-  }))
+  store: new PgSession({
+    pool: pool,
+    tableName: 'session',
+  }),
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000,
+    secure: true
+  }
+}))
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-    origin: process.env.FRONTEND,
-    credentials:true
+  origin: process.env.FRONTEND,
+  credentials: true
 }));
+app.set('trust proxy', 1);
 app.use(express.json());
 
 app.use(books);
