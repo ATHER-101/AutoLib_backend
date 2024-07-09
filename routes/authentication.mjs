@@ -6,7 +6,8 @@ const router = Router();
 router.get("/api/auth/google", passport.authenticate("google"));
 
 router.get("/api/auth/google/callback", passport.authenticate("google",{
-    successRedirect: process.env.FRONTEND,
+    // successRedirect: process.env.FRONTEND,
+    successRedirect: "/api/auth/status",
     failureRedirect:"/api/auth/failed"
 }));
 
