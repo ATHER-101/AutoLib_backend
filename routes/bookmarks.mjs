@@ -20,12 +20,12 @@ router.get("/api/bookmarks", async (request, response) => {
 //check bookmark
 router.get("/api/check-bookmark", async (request, response) => {
     const { book_id } = request.query;
-    const {user_id} = request.query;
+    const { user_id } = request.query;
 
     const client = await pool.connect();
     try {
         const res = await client.query(`select * from bookmarks 
-            where user_id=$1 and book_id=$2;`, [user_id,book_id]);
+            where user_id=$1 and book_id=$2;`, [user_id, book_id]);
         return response.status(200).send(res.rows);
     } catch (error) {
         return response.status(500).send({ error: error.message });
