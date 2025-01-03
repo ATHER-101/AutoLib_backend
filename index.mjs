@@ -24,14 +24,11 @@ app.use(session({
     pool: pool,
     tableName: 'session',
   }),
-  secret: process.env.SESSION_SECRET || 'keyboard cat',
+  secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
-    secure: process.env.NODE_ENV === 'production', // Ensure this is true in production
-    httpOnly: true,
-    sameSite: 'none'
   }
 }));
 
@@ -39,11 +36,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-  origin: 'https://autolib-easy-librarying.onrender.com',
+  origin: process.env.FRONTEND,
   credentials: true
 }));
 
-app.set('trust proxy', 1); // Enable trust proxy for secure cookies behind proxies
 app.use(express.json());
 
 app.use(books);
@@ -51,16 +47,5 @@ app.use(users);
 app.use(issues);
 app.use(bookmarks);
 app.use(authentication);
-
-app.get("/api/auth/status", (request, response) => {
-  console.log("Session cookie:", request.headers.cookie); // Log cookie headers
-  if (request.user) {
-    console.log("User authenticated:", request.user);
-    response.send({ status: "authorised", user: request.user });
-  } else {
-    console.log("User not authenticated");
-    response.status(401).send({ status: "unauthorised" });
-  }
-});
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port} !`));
